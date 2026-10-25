@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Attendance System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="logo">✓</div>
+      <div>
+        <h2>ClassTrack</h2>
+        <small>Attendance Portal</small>
+      </div>
+    </div>
+
+    <p class="nav-label">MAIN MENU</p>
+    <nav>
+      <button class="nav-btn active" data-page="dashboard">▦ Dashboard</button>
+      <button class="nav-btn" data-page="students">♙ Student Records</button>
+      <button class="nav-btn" data-page="history">◷ Attendance History</button>
+    </nav>
+
+    <div class="side-note">
+      <strong>Class Reminder</strong>
+      <p>Record attendance every school day to keep your class updated.</p>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <span class="eyebrow">SCHOOL MANAGEMENT</span>
+        <h1 id="pageTitle">Good day, Teacher!</h1>
+        <p id="pageSubtitle">Here is your class attendance overview.</p>
+      </div>
+      <div class="date-box" id="todayDate"></div>
+    </header>
+
+    <section id="dashboard" class="page">
+      <div class="stats">
+        <div class="stat-card">
+          <span>Total Students</span>
+          <h2 id="totalStudents">0</h2>
+          <small>Registered students</small>
+        </div>
+        <div class="stat-card">
+          <span>Present Today</span>
+          <h2 id="presentCount">0</h2>
+          <small>Students present</small>
+        </div>
+        <div class="stat-card">
+          <span>Absent Today</span>
+          <h2 id="absentCount">0</h2>
+          <small>Students absent</small>
+        </div>
+        <div class="stat-card">
+          <span>Late Today</span>
+          <h2 id="lateCount">0</h2>
+          <small>Students arriving late</small>
+        </div>
+      </div>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h3>Today's Attendance</h3>
+            <p>Update each student's attendance status.</p>
+          </div>
+          <button class="btn btn-primary" id="saveAttendance">Save Attendance</button>
+        </div>
+
+        <div class="toolbar">
+          <input id="attendanceSearch" placeholder="Search student..." class="field">
+          <select id="statusFilter" class="field">
+            <option value="All">All Statuses</option>
+            <option>Present</option>
+            <option>Absent</option>
+            <option>Late</option>
+            <option>Unmarked</option>
+          </select>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Student</th>
+                <th>Student ID</th>
+                <th>Section</th>
+                <th>Status</th>
+                <th>Mark Attendance</th>
+              </tr>
+            </thead>
+            <tbody id="attendanceTable"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <section id="students" class="page hidden">
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h3>Student Records</h3>
+            <p>Manage your registered students.</p>
+          </div>
+          <button class="btn btn-primary" id="addStudentBtn">+ Add Student</button>
+        </div>
+
+        <div class="toolbar">
+          <input id="studentSearch" placeholder="Search student records..." class="field">
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Student Name</th>
+                <th>Student ID</th>
+                <th>Section</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="studentTable"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <section id="history" class="page hidden">
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h3>Attendance History</h3>
+            <p>Review attendance records saved by date.</p>
+          </div>
+          <button class="btn btn-primary" id="exportHistory">Export CSV</button>
+        </div>
+
+        <div class="history-summary">
+          <div><span>Saved Dates</span><h2 id="historyDates">0</h2></div>
+          <div><span>Latest Present</span><h2 id="historyPresent">0</h2></div>
+          <div><span>Latest Absent</span><h2 id="historyAbsent">0</h2></div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Total</th>
+                <th>Present</th>
+                <th>Absent</th>
+                <th>Late</th>
+                <th>Unmarked</th>
+              </tr>
+            </thead>
+            <tbody id="historyTable"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <footer>ClassTrack © 2026 | Student Attendance Monitoring System</footer>
+  </main>
+
+  <dialog id="studentDialog">
+    <form id="studentForm">
+      <h2>Add New Student</h2>
+      <p>Enter the student's information below.</p>
+
+      <label>Full Name
+        <input id="newName" class="field" required placeholder="e.g. Juan Dela Cruz">
+      </label>
+
+      <label>Student ID
+        <input id="newId" class="field" required placeholder="e.g. 2026-006">
+      </label>
+
+      <label>Section
+        <input id="newSection" class="field" required placeholder="e.g. BSIT-1 SOUTH-2">
+      </label>
+
+      <div class="dialog-actions">
+        <button type="button" class="btn" id="cancelAdd">Cancel</button>
+        <button type="submit" class="btn btn-primary">Add Student</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast hidden"></div>
+  <script src="script.js"></script>
+</body>
+</html>
